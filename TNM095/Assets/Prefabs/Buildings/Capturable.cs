@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Capturable : MonoBehaviour {
@@ -13,15 +12,27 @@ public class Capturable : MonoBehaviour {
     /// </summary>
     public List<Renderer> ownerIndicators;
 
+    /// <summary>
+    /// Number of units that begin stationed in this capturable.
+    /// </summary>
+    public readonly int startingUnits;
+
+    /// <summary>
+    /// <see cref="UnitIndicator"/> used to display number of units within this <see cref="Capturable"/>
+    /// </summary>
+    public UnitIndicator indicator;
+
     private int unitCount;
 
     void Start()
     {
+        unitCount = startingUnits;
+
         if (owner != null)
         {
             foreach (Renderer r in ownerIndicators)
             {
-                r.material = owner.playerMaterial;
+                r.material.color = owner.playerColor;
             }
         }
     }
