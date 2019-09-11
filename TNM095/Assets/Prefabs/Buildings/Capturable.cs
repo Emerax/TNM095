@@ -27,29 +27,24 @@ public class Capturable : MonoBehaviour {
     /// </summary>
     private int unitCount;
 
-    void Start()
-    {
+    void Start() {
         unitCount = startingUnits;
 
-        if (owner != null){
+        if (owner != null) {
           indicator.UpdateText(unitCount.ToString(), owner.playerColor);
         }
-        else{
+        else {
           indicator.UpdateText(unitCount.ToString(), Color.grey);
         }
 
-        if (owner != null)
-        {
-            foreach (Renderer r in ownerIndicators)
-            {
+        if (owner != null) {
+            foreach (Renderer r in gameObject.GetComponentsInChildren<Renderer>()) {
                 r.material.color = owner.playerColor;
             }
         }
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
+    void Update() {
     }
 }
