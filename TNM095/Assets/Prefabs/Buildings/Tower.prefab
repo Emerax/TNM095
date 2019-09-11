@@ -1445,6 +1445,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   ownerIndicators: []
   startingUnits: 0
+  unitCap: 50
   indicator: {fileID: 926840873601969060}
 --- !u!1 &3648920973539896388
 GameObject:

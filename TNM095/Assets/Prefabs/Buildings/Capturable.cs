@@ -18,6 +18,11 @@ public class Capturable : MonoBehaviour {
     public int startingUnits;
 
     /// <summary>
+    /// Maximum number of units that can be held by this <see cref="Capturable"/>
+    /// </summary>
+    public int unitCap;
+
+    /// <summary>
     /// <see cref="UnitIndicator"/> used to display number of units within this <see cref="Capturable"/>
     /// </summary>
     public UnitIndicator indicator;
@@ -25,7 +30,7 @@ public class Capturable : MonoBehaviour {
     /// <summary>
     /// Current units in this <see cref="Capturable"/>
     /// </summary>
-    private int unitCount;
+    protected int unitCount;
 
     void Start() {
         unitCount = startingUnits;
