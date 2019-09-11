@@ -331,6 +331,7 @@ MonoBehaviour:
   - {fileID: 3754852527522176380}
   - {fileID: 3754852527405586067}
   - {fileID: 4339463656274959855}
+  startingUnits: 0
   indicator: {fileID: 8642696955171064797}
 --- !u!1 &3754852526838849108
 GameObject:
@@ -1263,6 +1264,12 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e, type: 3}
 --- !u!4 &6096112606183727729 stripped

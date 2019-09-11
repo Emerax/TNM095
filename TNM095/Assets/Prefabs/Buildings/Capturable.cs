@@ -6,7 +6,7 @@ public class Capturable : MonoBehaviour {
     /// <see cref="Player"/> instance that currently owns this <see cref="Capturable"/>.
     /// </summary>
     public Player owner;
-    
+
     /// <summary>
     /// List of Renderers that should change their material to that of the owning player to indicate ownership¨.
     /// </summary>
@@ -30,7 +30,13 @@ public class Capturable : MonoBehaviour {
     void Start()
     {
         unitCount = startingUnits;
-        indicator.UpdateText(unitCount.ToString(), owner.playerColor);
+
+        if (owner != null){
+          indicator.UpdateText(unitCount.ToString(), owner.playerColor);
+        }
+        else{
+          indicator.UpdateText(unitCount.ToString(), Color.grey);
+        }
 
         if (owner != null)
         {
