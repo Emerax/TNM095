@@ -8,4 +8,9 @@ public class UnitIndicator : MonoBehaviour {
         textRenderer.color = color;
         textRenderer.text = text;
     }
+
+    private void Update()
+    {
+        transform.rotation = Camera.main.transform.rotation;
+    }
 }

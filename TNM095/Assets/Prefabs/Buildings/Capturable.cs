@@ -15,18 +15,22 @@ public class Capturable : MonoBehaviour {
     /// <summary>
     /// Number of units that begin stationed in this capturable.
     /// </summary>
-    public readonly int startingUnits;
+    public int startingUnits;
 
     /// <summary>
     /// <see cref="UnitIndicator"/> used to display number of units within this <see cref="Capturable"/>
     /// </summary>
     public UnitIndicator indicator;
 
+    /// <summary>
+    /// Current units in this <see cref="Capturable"/>
+    /// </summary>
     private int unitCount;
 
     void Start()
     {
         unitCount = startingUnits;
+        indicator.UpdateText(unitCount.ToString(), owner.playerColor);
 
         if (owner != null)
         {
