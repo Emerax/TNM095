@@ -50,7 +50,11 @@ MonoBehaviour:
   owner: {fileID: 0}
   ownerIndicators: []
   startingUnits: 0
+  unitCap: 300
   indicator: {fileID: 4488408010483975083}
+  baseUnitProduction: 3
+  unitProductionModifier: 1.5
+  unitProductionTime: 3
 --- !u!1 &522102698046963403
 GameObject:
   m_ObjectHideFlags: 0

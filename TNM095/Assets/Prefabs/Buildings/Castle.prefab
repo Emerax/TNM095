@@ -332,7 +332,11 @@ MonoBehaviour:
   - {fileID: 3754852527405586067}
   - {fileID: 4339463656274959855}
   startingUnits: 0
+  unitCap: 500
   indicator: {fileID: 8642696955171064797}
+  baseUnitProduction: 5
+  unitProductionModifier: 1.2
+  unitProductionTime: 3
 --- !u!1 &3754852526838849108
 GameObject:
   m_ObjectHideFlags: 0

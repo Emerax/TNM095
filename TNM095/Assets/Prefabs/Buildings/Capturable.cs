@@ -18,6 +18,11 @@ public class Capturable : MonoBehaviour {
     public int startingUnits;
 
     /// <summary>
+    /// Maximum number of units that can be held by this <see cref="Capturable"/>
+    /// </summary>
+    public int unitCap;
+
+    /// <summary>
     /// <see cref="UnitIndicator"/> used to display number of units within this <see cref="Capturable"/>
     /// </summary>
     public UnitIndicator indicator;
@@ -25,31 +30,26 @@ public class Capturable : MonoBehaviour {
     /// <summary>
     /// Current units in this <see cref="Capturable"/>
     /// </summary>
-    private int unitCount;
+    protected int unitCount;
 
-    void Start()
-    {
+    void Start() {
         unitCount = startingUnits;
 
-        if (owner != null){
+        if (owner != null) {
           indicator.UpdateText(unitCount.ToString(), owner.playerColor);
         }
-        else{
+        else {
           indicator.UpdateText(unitCount.ToString(), Color.grey);
         }
 
-        if (owner != null)
-        {
-            foreach (Renderer r in ownerIndicators)
-            {
+        if (owner != null) {
+            foreach (Renderer r in gameObject.GetComponentsInChildren<Renderer>()) {
                 r.material.color = owner.playerColor;
             }
         }
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
+    void Update() {
     }
 }
