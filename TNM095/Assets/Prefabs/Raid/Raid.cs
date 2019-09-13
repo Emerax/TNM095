@@ -29,11 +29,7 @@ public class Raid : MonoBehaviour{
   }
 
   void Update() {
-    Move();
-  }
-
-  public void Init(int units) {
-    unitCount = units;
+    //Move();
   }
 
   private void Move() {
@@ -41,4 +37,17 @@ public class Raid : MonoBehaviour{
     if((transform.position - dest.transform.position).magnitude < 0.1)
       dest.UnitsArrive(this);
   }
+
+  public void Init(int units) {
+    unitCount = units;
+  }
+
+  public void Attacked(int damage) {
+    unitCount -= damage;
+    indicator.UpdateText(unitCount.ToString(), owner.playerColor);
+    if(unitCount <= 0) {
+      Destroy(this.gameObject);
+    }
+  }
+
 }
