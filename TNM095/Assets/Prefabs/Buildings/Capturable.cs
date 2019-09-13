@@ -52,4 +52,19 @@ public class Capturable : MonoBehaviour {
     // Update is called once per frame
     void Update() {
     }
+
+    public void UnitsArrive(Raid raid) {
+      if (raid.owner == owner) {
+        unitCount += raid.unitCount;
+      }
+      else {
+        if (raid.unitCount > unitCount) {
+          owner = raid.owner;
+        }
+        unitCount = Mathf.Abs(unitCount - raid.unitCount);
+      }
+      indicator.UpdateText(unitCount.ToString(), owner.playerColor);
+      //Update color of Capturable
+      Destroy(raid.gameObject);
+    }
 }
