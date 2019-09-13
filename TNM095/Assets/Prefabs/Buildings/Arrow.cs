@@ -24,7 +24,9 @@ public class Arrow : MonoBehaviour
 
     private void Move() {
       transform.position += movVec*speed*Time.deltaTime;
-      if((transform.position - target.transform.position).magnitude < 0.5) {
+      if (!target) {
+        Destroy(this.gameObject);
+      } else if ((transform.position - target.transform.position).magnitude < 0.5) {
           target.Attacked(damage);
           Destroy(this.gameObject);
       }

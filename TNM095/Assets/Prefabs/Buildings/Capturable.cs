@@ -34,6 +34,7 @@ public class Capturable : MonoBehaviour {
 
     void Start() {
         unitCount = startingUnits;
+        owner.updateMaxUnits(unitCap);
 
         if (owner != null) {
           indicator.UpdateText(unitCount.ToString(), owner.playerColor);
@@ -59,12 +60,14 @@ public class Capturable : MonoBehaviour {
       }
       else {
         if (raid.unitCount > unitCount) {
+          owner.updateMaxUnits(-unitCap);
+          raid.owner.updateMaxUnits(unitCap);
+          //Update color of Capturable
           owner = raid.owner;
         }
         unitCount = Mathf.Abs(unitCount - raid.unitCount);
       }
       indicator.UpdateText(unitCount.ToString(), owner.playerColor);
-      //Update color of Capturable
       Destroy(raid.gameObject);
     }
 }

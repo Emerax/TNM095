@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
 
 public class Player : MonoBehaviour {
+    public int maxUnits = 0;
+
     public Material playerMaterial;
     public Color playerColor;
 
-    // Start is called before the first frame update
     void Start(){
 
     }
 
-    // Update is called once per frame
     void Update(){
 
+    }
+
+    public void updateMaxUnits(int maxUnitsChanged){
+      maxUnits += maxUnitsChanged;
     }
 }

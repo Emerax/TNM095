@@ -29,7 +29,7 @@ public class Raid : MonoBehaviour{
   }
 
   void Update() {
-    //Move();
+    Move();
   }
 
   private void Move() {
