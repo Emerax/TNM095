@@ -1657,7 +1657,10 @@ MonoBehaviour:
   startingUnits: 0
   unitCap: 50
   unitIndicator: {fileID: 926840873601969060}
-  selectionIndicator: {fileID: 0}
+  selectionIndicator: {fileID: 5224009632446755987, guid: 16f764e301a7a384daf10cbae3780a59,
+    type: 3}
+  raidPrefab: {fileID: 4734806497979062348, guid: bf3bbdbc8e45edc30acf2647f508f748,
+    type: 3}
 --- !u!1 &3648920973539896388
 GameObject:
   m_ObjectHideFlags: 0

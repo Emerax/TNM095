@@ -54,6 +54,8 @@ MonoBehaviour:
   unitCap: 300
   unitIndicator: {fileID: 4488408010483975083}
   selectionIndicator: {fileID: 7663628799190311252}
+  raidPrefab: {fileID: 4734806497979062348, guid: bf3bbdbc8e45edc30acf2647f508f748,
+    type: 3}
   baseUnitProduction: 3
   unitProductionModifier: 1.5
   unitProductionTime: 3
@@ -537,6 +539,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5224009633057628406, guid: 16f764e301a7a384daf10cbae3780a59,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5224009632446755987, guid: 16f764e301a7a384daf10cbae3780a59,
         type: 3}
       propertyPath: selectionMarker
@@ -546,11 +553,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 1.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 5224009633057628406, guid: 16f764e301a7a384daf10cbae3780a59,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5224009633057628400, guid: 16f764e301a7a384daf10cbae3780a59,
         type: 3}

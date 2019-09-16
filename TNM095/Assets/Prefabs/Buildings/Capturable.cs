@@ -32,27 +32,25 @@ public class Capturable : MonoBehaviour {
     /// </summary>
     public SelectionIndicator selectionIndicator;
 
+    public Raid raidPrefab;
+
     /// <summary>
     /// Current units in this <see cref="Capturable"/>
     /// </summary>
     protected int unitCount;
 
     void Start() {
+        Colorize();
+
         unitCount = startingUnits;
 
         selectionIndicator.gameObject.SetActive(false);
 
         if (owner != null) {
-          unitIndicator.UpdateText(unitCount.ToString(), owner.playerColor);
-        }
-        else {
-          unitIndicator.UpdateText(unitCount.ToString(), Color.grey);
-        }
-
-        if (owner != null) {
-            foreach (Renderer r in gameObject.GetComponentsInChildren<Renderer>()) {
-                r.material.color = owner.playerColor;
-            }
+            owner.UpdateMaxUnits(unitCap);
+            unitIndicator.UpdateText(unitCount.ToString(), owner.playerColor);
+        } else {
+            unitIndicator.UpdateText(unitCount.ToString(), Color.grey);
         }
     }
 
@@ -67,5 +65,50 @@ public class Capturable : MonoBehaviour {
 
     public void OnDeselected() {
         selectionIndicator.gameObject.SetActive(false);
+    }
+
+    public void UnitsArrive(Raid raid) {
+        if (raid.owner == owner) {
+            unitCount += raid.unitCount;
+        } else {
+            if (raid.unitCount > unitCount) {
+                ChangeOwner(raid);
+            }
+            unitCount = Mathf.Abs(unitCount - raid.unitCount);
+        }
+        unitIndicator.UpdateText(unitCount.ToString(), owner.playerColor);
+        Destroy(raid.gameObject);
+    }
+
+    public void BeginRaid(Capturable target) {
+        int raidCount = unitCount / 2;
+        if(raidCount > 0) {
+            unitCount -= raidCount;
+
+            Vector3 targetVector = target.transform.position - transform.position;
+            Raid raid = Instantiate(raidPrefab, transform.position, Quaternion.LookRotation(targetVector, Vector3.up));
+
+            raid.Init(owner, target, raidCount);
+            unitIndicator.UpdateText(unitCount.ToString(), owner.playerColor);
+        }
+    }
+
+    private void ChangeOwner(Raid raid) {
+        if(owner != null) {
+            owner.UpdateMaxUnits(-unitCap);
+        }
+        raid.owner.UpdateMaxUnits(unitCap);
+        owner = raid.owner;
+        Colorize();
+    }
+
+    private void Colorize() {
+        Color newColor = Color.gray;
+        if (owner != null) {
+            newColor = owner.playerColor;
+        }
+        foreach (Renderer r in gameObject.GetComponentsInChildren<Renderer>()) {
+            r.material.color = newColor;
+        }
     }
 }
