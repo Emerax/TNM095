@@ -25,7 +25,12 @@ public class Capturable : MonoBehaviour {
     /// <summary>
     /// <see cref="UnitIndicator"/> used to display number of units within this <see cref="Capturable"/>
     /// </summary>
-    public UnitIndicator indicator;
+    public UnitIndicator unitIndicator;
+
+    /// <summary>
+    /// <see cref="SelectionIndicator"/> used to display if this particular Capturable is selected by a Controller.
+    /// </summary>
+    public SelectionIndicator selectionIndicator;
 
     /// <summary>
     /// Current units in this <see cref="Capturable"/>
@@ -35,11 +40,13 @@ public class Capturable : MonoBehaviour {
     void Start() {
         unitCount = startingUnits;
 
+        selectionIndicator.gameObject.SetActive(false);
+
         if (owner != null) {
-          indicator.UpdateText(unitCount.ToString(), owner.playerColor);
+          unitIndicator.UpdateText(unitCount.ToString(), owner.playerColor);
         }
         else {
-          indicator.UpdateText(unitCount.ToString(), Color.grey);
+          unitIndicator.UpdateText(unitCount.ToString(), Color.grey);
         }
 
         if (owner != null) {
@@ -51,5 +58,14 @@ public class Capturable : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+    }
+
+    public void OnSelected() {
+        selectionIndicator.gameObject.SetActive(true);
+        selectionIndicator.SetColor(owner.playerColor);
+    }
+
+    public void OnDeselected() {
+        selectionIndicator.gameObject.SetActive(false);
     }
 }
