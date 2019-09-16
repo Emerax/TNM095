@@ -49,7 +49,6 @@ public class HumanController : BaseController {
                     Selectable s = rayHit.collider.GetComponent<Selectable>();
                     if (s != null) {
                         Capturable target = s.select;
-                        Debug.Log("Sending units from " + selected.name + " to " + target.name);
                         selected.BeginRaid(target);
                     }
                 }

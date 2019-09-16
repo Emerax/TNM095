@@ -82,7 +82,7 @@ public class Capturable : MonoBehaviour {
 
     public void BeginRaid(Capturable target) {
         int raidCount = unitCount / 2;
-        if(raidCount > 0) {
+        if(raidCount > 0 && target != this) {
             unitCount -= raidCount;
 
             Vector3 targetVector = target.transform.position - transform.position;
