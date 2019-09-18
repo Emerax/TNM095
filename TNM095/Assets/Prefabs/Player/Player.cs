@@ -1,20 +1,11 @@
 ﻿using UnityEngine;
 
 public class Player : MonoBehaviour {
-    public int maxUnits = 0;
-
-    public Material playerMaterial;
     public Color playerColor;
 
-    void Start(){
+    private int maxUnits;
 
-    }
-
-    void Update(){
-
-    }
-
-    public void updateMaxUnits(int maxUnitsChanged){
+    public void UpdateMaxUnits(int maxUnitsChanged){
       maxUnits += maxUnitsChanged;
     }
 }

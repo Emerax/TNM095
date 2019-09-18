@@ -44,8 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba080d488bee661e98de9dbe85a77a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitCount: 0
+  circleSize: 2
+  speed: 2
   raiderPrefab: {fileID: 683245240503768842, guid: 4bd5a27cae2ffa1f8a777106fe9517c7,
     type: 3}
+  indicator: {fileID: 2081956892493833944}
+  owner: {fileID: 0}
 --- !u!1001 &5612603937570454076
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -152,3 +157,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5612603937570454076}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2081956892493833944 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5838742403994688740, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5612603937570454076}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9fe1d5d6ae10ea42a1720182bb28c81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
