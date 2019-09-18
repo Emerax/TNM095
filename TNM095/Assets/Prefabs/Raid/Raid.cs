@@ -20,7 +20,7 @@ public class Raid : MonoBehaviour {
         spawnNumber = (int)Mathf.Floor(unitCount / Mathf.Sqrt(unitCount));
         raiders = new List<GameObject>();
         movVec = Vector3.Normalize(dest.transform.position - transform.position);
-        indicator.UpdateText(unitCount.ToString(), owner.playerColor);
+        indicator.UpdateText(unitCount.ToString(), owner);
 
         for (int i = 0; i < spawnNumber; i++) {
             Vector2 randPos = circleSize * Random.insideUnitCircle;
@@ -56,7 +56,7 @@ public class Raid : MonoBehaviour {
 
     public void Attacked(int damage) {
         unitCount -= damage;
-        indicator.UpdateText(unitCount.ToString(), owner.playerColor);
+        indicator.UpdateText(unitCount.ToString(), owner);
         if (unitCount <= 0) {
             Destroy(this.gameObject);
         }

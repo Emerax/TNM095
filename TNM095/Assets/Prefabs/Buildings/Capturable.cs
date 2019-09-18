@@ -48,9 +48,9 @@ public class Capturable : MonoBehaviour {
 
         if (owner != null) {
             owner.UpdateMaxUnits(unitCap);
-            unitIndicator.UpdateText(unitCount.ToString(), owner.playerColor);
+            unitIndicator.UpdateText(unitCount.ToString(), owner);
         } else {
-            unitIndicator.UpdateText(unitCount.ToString(), Color.grey);
+            unitIndicator.UpdateText(unitCount.ToString(), owner);
         }
     }
 
@@ -72,11 +72,13 @@ public class Capturable : MonoBehaviour {
             unitCount += raid.unitCount;
         } else {
             if (raid.unitCount > unitCount) {
-                ChangeOwner(raid);
+                ChangeOwner(raid.owner);
+            } else if (raid.unitCount == unitCount){
+              ChangeOwner(null);
             }
             unitCount = Mathf.Abs(unitCount - raid.unitCount);
         }
-        unitIndicator.UpdateText(unitCount.ToString(), owner.playerColor);
+        unitIndicator.UpdateText(unitCount.ToString(), owner);
         Destroy(raid.gameObject);
     }
 
@@ -89,16 +91,18 @@ public class Capturable : MonoBehaviour {
             Raid raid = Instantiate(raidPrefab, transform.position, Quaternion.LookRotation(targetVector, Vector3.up));
 
             raid.Init(owner, target, raidCount);
-            unitIndicator.UpdateText(unitCount.ToString(), owner.playerColor);
+            unitIndicator.UpdateText(unitCount.ToString(), owner);
         }
     }
 
-    private void ChangeOwner(Raid raid) {
-        if(owner != null) {
+    private void ChangeOwner(Player newOwner) {
+        if (owner != null) {
             owner.UpdateMaxUnits(-unitCap);
         }
-        raid.owner.UpdateMaxUnits(unitCap);
-        owner = raid.owner;
+        owner = newOwner;
+        if (owner != null) {
+          owner.UpdateMaxUnits(unitCap);
+        }
         Colorize();
     }
 
