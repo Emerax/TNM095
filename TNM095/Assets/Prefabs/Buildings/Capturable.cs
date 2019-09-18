@@ -44,7 +44,7 @@ public class Capturable : MonoBehaviour {
 
         unitCount = startingUnits;
 
-        selectionIndicator.gameObject.SetActive(false);
+        //selectionIndicator.gameObject.SetActive(false);
 
         if (owner != null) {
             owner.UpdateMaxUnits(unitCap);
@@ -84,7 +84,7 @@ public class Capturable : MonoBehaviour {
 
     public void BeginRaid(Capturable target) {
         int raidCount = unitCount / 2;
-        if(raidCount > 0 && target != this && target.unitCount < target.unitCap) {
+        if(raidCount > 0 && (target.owner != owner || target.unitCount < target.unitCap)) {
             unitCount -= raidCount;
 
             Vector3 targetVector = target.transform.position - transform.position;
