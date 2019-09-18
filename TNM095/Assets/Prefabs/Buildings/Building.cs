@@ -40,7 +40,7 @@ public class Building : Capturable {
     private void ProduceUnits() {
         if(unitCount < unitCap) {
             unitCount = Mathf.Min(unitCount + baseUnitProduction + Mathf.FloorToInt(unitProductionModifier * unitCount), unitCap);
-            unitIndicator.UpdateText(unitCount.ToString(), owner.playerColor);
+            unitIndicator.UpdateText(unitCount.ToString(), owner);
         }
     }
 }
