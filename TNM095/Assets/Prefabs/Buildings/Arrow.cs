@@ -2,33 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
-{
-    private Vector3 movVec;
+public class Arrow : MonoBehaviour {
     private int damage;
-    public float speed;
 
-    public Capturable tower;
+    public float speed;
     public Raid target;
-    public GameObject arrowPrefab;
 
     void Start() {
-      movVec = Vector3.Normalize(target.transform.position - transform.position);
-      damage = 15;
-      speed = 7;
+        damage = 15;
+        speed = 7;
     }
 
     void Update() {
-      Move();
+        Move();
+    }
+
+    public void Init(Raid target, int damage) {
+        this.target = target;
+        this.damage = damage;
     }
 
     private void Move() {
-      transform.position += movVec*speed*Time.deltaTime;
-      if (!target) {
-        Destroy(this.gameObject);
-      } else if ((transform.position - target.transform.position).magnitude < 0.5) {
-          target.Attacked(damage);
-          Destroy(this.gameObject);
-      }
+        if(target != null) {
+            Vector3 movVec = Vector3.Normalize(target.transform.position - transform.position);
+            transform.rotation = Quaternion.LookRotation(movVec);
+            transform.position += movVec * speed * Time.deltaTime;
+            if (!target) {
+                Destroy(gameObject);
+            } else if ((transform.position - target.transform.position).magnitude < 0.5) {
+                target.Attacked(damage);
+                Destroy(gameObject);
+            }
+        } else {
+            Destroy(gameObject);
+        }
     }
 }

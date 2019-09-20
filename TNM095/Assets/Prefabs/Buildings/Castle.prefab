@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3754852526574300769}
   - component: {fileID: 3754852526574300780}
   - component: {fileID: 3754852526574300771}
-  - component: {fileID: 3754852526574300770}
   - component: {fileID: 6616235098905876297}
   m_Layer: 0
   m_Name: Base
@@ -80,20 +79,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &3754852526574300770
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3754852526574300768}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &6616235098905876297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,6 +314,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3754852526835623035}
   - component: {fileID: 6705274521057381092}
+  - component: {fileID: 856239352562137949}
+  - component: {fileID: 2683594468309590135}
   m_Layer: 0
   m_Name: Castle
   m_TagString: Untagged
@@ -380,9 +367,37 @@ MonoBehaviour:
   selectionIndicator: {fileID: 1663048456802036330}
   raidPrefab: {fileID: 4734806497979062348, guid: bf3bbdbc8e45edc30acf2647f508f748,
     type: 3}
+  unitCount: 0
   baseUnitProduction: 5
   unitProductionModifier: 1.2
   unitProductionTime: 3
+--- !u!136 &856239352562137949
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3754852526835623034}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.7
+  m_Height: 3.064409
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.1729106, z: 0}
+--- !u!114 &2683594468309590135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3754852526835623034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3bc1c7b149b3f7478cdb28c50074b80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  select: {fileID: 6705274521057381092}
 --- !u!1 &3754852526838849108
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +621,6 @@ GameObject:
   - component: {fileID: 3754852527127665051}
   - component: {fileID: 3754852527127665062}
   - component: {fileID: 3754852527127665061}
-  - component: {fileID: 3754852527127665060}
   - component: {fileID: 1492453491446440601}
   m_Layer: 0
   m_Name: Top
@@ -683,20 +697,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &3754852527127665060
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3754852527127665050}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &1492453491446440601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1145,7 +1145,6 @@ GameObject:
   - component: {fileID: 6188418583354367121}
   - component: {fileID: 5608851470297652060}
   - component: {fileID: 2689405376194533407}
-  - component: {fileID: 3571951133085134324}
   - component: {fileID: 27922744924780124}
   m_Layer: 0
   m_Name: FlagPole
@@ -1215,20 +1214,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &3571951133085134324
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7055813093506686163}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &27922744924780124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1253,7 +1238,6 @@ GameObject:
   - component: {fileID: 5582927418311118402}
   - component: {fileID: 8057037253367311543}
   - component: {fileID: 4339463656274959855}
-  - component: {fileID: 6810672928257583106}
   - component: {fileID: 2469806252961941502}
   m_Layer: 0
   m_Name: Flag
@@ -1322,19 +1306,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &6810672928257583106
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7095780801504012035}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2469806252961941502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1478,6 +1449,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SelectionIndicator
       objectReference: {fileID: 0}
+    - target: {fileID: 5224009632446755996, guid: 16f764e301a7a384daf10cbae3780a59,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5224009632446755987, guid: 16f764e301a7a384daf10cbae3780a59,
+        type: 3}
+      propertyPath: selectionMarker
+      value: '[  ]'
+      objectReference: {fileID: 0}
     - target: {fileID: 5224009632446755986, guid: 16f764e301a7a384daf10cbae3780a59,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1532,16 +1513,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5224009633057628406, guid: 16f764e301a7a384daf10cbae3780a59,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5224009632446755987, guid: 16f764e301a7a384daf10cbae3780a59,
-        type: 3}
-      propertyPath: selectionMarker
-      value: '[  ]'
       objectReference: {fileID: 0}
     - target: {fileID: 5224009633057628401, guid: 16f764e301a7a384daf10cbae3780a59,
         type: 3}
@@ -1602,6 +1573,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textAlignment
       value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 5224009633057628406, guid: 16f764e301a7a384daf10cbae3780a59,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16f764e301a7a384daf10cbae3780a59, type: 3}

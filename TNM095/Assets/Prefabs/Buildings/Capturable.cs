@@ -44,7 +44,7 @@ public class Capturable : MonoBehaviour {
 
         unitCount = startingUnits;
 
-        //selectionIndicator.gameObject.SetActive(false);
+        selectionIndicator.gameObject.SetActive(false);
 
         if (owner != null) {
             owner.UpdateMaxUnits(unitCap);
@@ -95,7 +95,7 @@ public class Capturable : MonoBehaviour {
         }
     }
 
-    private void ChangeOwner(Player newOwner) {
+    protected virtual void ChangeOwner(Player newOwner) {
         if (owner != null) {
             owner.UpdateMaxUnits(-unitCap);
         }
@@ -106,7 +106,7 @@ public class Capturable : MonoBehaviour {
         Colorize();
     }
 
-    private void Colorize() {
+    protected virtual void Colorize() {
         Color newColor = Color.gray;
         if (owner != null) {
             newColor = owner.playerColor;

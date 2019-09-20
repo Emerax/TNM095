@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 522102697443971490}
   - component: {fileID: -1713781380674489751}
+  - component: {fileID: 1841630015429546025}
+  - component: {fileID: 926114938728022908}
   m_Layer: 0
   m_Name: Hut
   m_TagString: Untagged
@@ -60,6 +62,33 @@ MonoBehaviour:
   baseUnitProduction: 3
   unitProductionModifier: 1.5
   unitProductionTime: 3
+--- !u!136 &1841630015429546025
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522102697443971489}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.7
+  m_Height: 2.719936
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.85996795, z: 0}
+--- !u!114 &926114938728022908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522102697443971489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3bc1c7b149b3f7478cdb28c50074b80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  select: {fileID: -1713781380674489751}
 --- !u!1 &522102698046963403
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,7 +100,6 @@ GameObject:
   - component: {fileID: 522102698046963407}
   - component: {fileID: 522102698046963406}
   - component: {fileID: 522102698046963405}
-  - component: {fileID: 522102698046963404}
   - component: {fileID: 7748673177412387820}
   m_Layer: 0
   m_Name: Base
@@ -140,20 +168,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &522102698046963404
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522102698046963403}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &7748673177412387820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +193,6 @@ GameObject:
   - component: {fileID: 522102698528905699}
   - component: {fileID: 522102698528905698}
   - component: {fileID: 2847745881983701726}
-  - component: {fileID: 6739813234807650220}
   m_Layer: 0
   m_Name: Cone
   m_TagString: Untagged
@@ -260,20 +273,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   select: {fileID: -1713781380674489751}
---- !u!64 &6739813234807650220
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522102698528905696}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: c72121de964e11fe699f189c385ad9ea, type: 2}
 --- !u!1 &910044629122101021
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +284,6 @@ GameObject:
   - component: {fileID: 530130163824111951}
   - component: {fileID: 5068272402230946549}
   - component: {fileID: 4852532273738651528}
-  - component: {fileID: 6023587533061177334}
   - component: {fileID: 510050128670646478}
   m_Layer: 0
   m_Name: FlagPole
@@ -355,20 +353,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &6023587533061177334
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910044629122101021}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &510050128670646478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,7 +377,6 @@ GameObject:
   - component: {fileID: 6447231228068742386}
   - component: {fileID: 8337063470780703928}
   - component: {fileID: 394276823748015271}
-  - component: {fileID: 5542251362373981246}
   - component: {fileID: 5749788632387772361}
   m_Layer: 0
   m_Name: Flag
@@ -462,19 +445,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &5542251362373981246
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1405033646587746456}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5749788632387772361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,6 +469,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SelectionIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 5224009632446755996, guid: 16f764e301a7a384daf10cbae3780a59,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5224009632446755987, guid: 16f764e301a7a384daf10cbae3780a59,
         type: 3}
