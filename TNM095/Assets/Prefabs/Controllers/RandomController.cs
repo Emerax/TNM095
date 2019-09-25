@@ -35,8 +35,9 @@ public class RandomController : BaseController {
                     Capturable target = targets[Random.Range(0, targets.Count)];
                     selected.BeginRaid(target);
                 } else {
-                    Debug.Log("YOU WIN, WELL PLAYED HUMAN!");
-                    Destroy(gameObject);
+                    if (new List<Raid>(FindObjectsOfType<Raid>()).Where(r => r.owner == player).ToList().Count == 0) {
+                      OnLose();
+                    }
                 }
             }
 

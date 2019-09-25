@@ -264,7 +264,7 @@ MonoBehaviour:
     type: 3}
   unitCount: 0
   baseUnitProduction: 8
-  unitProductionModifier: 1.2
+  unitProductionModifier: 0.2
   unitProductionTime: 3
 --- !u!65 &6381495022036618208
 BoxCollider:
@@ -4687,16 +4687,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4772602696691005139}
     m_Modifications:
-    - target: {fileID: 5224009632446755996, guid: 16f764e301a7a384daf10cbae3780a59,
-        type: 3}
-      propertyPath: m_Name
-      value: SelectionIndicator
-      objectReference: {fileID: 0}
-    - target: {fileID: 5224009632446755996, guid: 16f764e301a7a384daf10cbae3780a59,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5224009632446755987, guid: 16f764e301a7a384daf10cbae3780a59,
         type: 3}
       propertyPath: selectionMarker
@@ -4756,6 +4746,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5224009632446755996, guid: 16f764e301a7a384daf10cbae3780a59,
+        type: 3}
+      propertyPath: m_Name
+      value: SelectionIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 5224009632446755996, guid: 16f764e301a7a384daf10cbae3780a59,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5224009633057628401, guid: 16f764e301a7a384daf10cbae3780a59,
         type: 3}

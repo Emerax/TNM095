@@ -27,10 +27,16 @@ public class Raid : MonoBehaviour {
             raiders.Add(Instantiate(raiderPrefab, new Vector3(transform.position.x + randPos.x, transform.position.y, transform.position.z + randPos.y), transform.rotation, transform));
         }
         Colorize();
+
+        GameObject.FindObjectOfType<GameState>().raidCreated(this);
     }
 
     void Update() {
         Move();
+    }
+
+    void OnDestroy() {
+        GameObject.FindObjectOfType<GameState>().raidRemoved(this);
     }
 
     private void Move() {
