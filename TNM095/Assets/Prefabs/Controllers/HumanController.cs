@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HumanController : BaseController {
@@ -7,7 +8,7 @@ public class HumanController : BaseController {
 
     // Start is called before the first frame update
     void Start() {
-        
+
     }
 
     // Update is called once per frame
@@ -16,6 +17,12 @@ public class HumanController : BaseController {
 
         if(selected != null) {
             UpdateSelection();
+        }
+
+        if (new List<Capturable>(FindObjectsOfType<Capturable>()).Where(r => r.owner == player).ToList().Count == 0) {
+          if (new List<Raid>(FindObjectsOfType<Raid>()).Where(r => r.owner == player).ToList().Count == 0) {
+            OnLose();
+          }
         }
     }
 

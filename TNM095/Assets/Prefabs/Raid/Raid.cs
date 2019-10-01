@@ -36,7 +36,7 @@ public class Raid : MonoBehaviour {
     }
 
     void OnDestroy() {
-        GameObject.FindObjectOfType<GameState>().raidRemoved(this);
+        GameObject.FindObjectOfType<GameState>()?.raidRemoved(this);
     }
 
     private void Move() {
