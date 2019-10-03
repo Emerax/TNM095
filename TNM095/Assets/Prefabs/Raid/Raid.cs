@@ -7,8 +7,8 @@ public class Raid : MonoBehaviour {
     private List<GameObject> raiders;
     private int spawnNumber;
     private Vector3 movVec;
-    private Capturable dest;
-
+    
+    public Capturable dest;
     public int unitCount;
     public float circleSize;
     public float speed;

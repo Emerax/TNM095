@@ -30,9 +30,12 @@ public class HeuristicController : BaseController {
     private void SelectState() {
       List<Capturable> ownCaps = gameState.capturables.Where(c => c.owner == player).ToList();
       List<Capturable> neutralCaps = gameState.capturables.Where(c => c.owner == null).ToList();
+      List<Raid> conqHostileRaids = gameState.raids.Where(r => ownCaps.Contains(r.dest) && r.unitCount > r.dest.unitCount && r.dest.unitCount != r.dest.unitCap).ToList();
 
       if (neutralCaps.Count > 0) {
         currState = State.EXPAND;
+      } else if (conqHostileRaids.Count > 0) {
+        currState = State.DEFEND;
       } else {
         currState = State.GROW;
       }
@@ -40,8 +43,7 @@ public class HeuristicController : BaseController {
 
     // Changes state into the selected one
     private void ChangeState() {
-        switch (currState)
-        {
+        switch (currState) {
           case State.CONQUER:
               Debug.Log("Conquering...");
               Conquer();
@@ -83,7 +85,18 @@ public class HeuristicController : BaseController {
 
     // Send troops to a friendly structure to avoid that it is taken over
     private void Defend() {
+      List<Capturable> ownCaps = gameState.capturables.Where(c => c.owner == player).ToList();
+      List<Raid> conqHostileRaids = gameState.raids.Where(r => ownCaps.Contains(r.dest) && r.unitCount > r.dest.unitCount && r.dest.unitCount != r.dest.unitCap).ToList();
+      if(conqHostileRaids != null) {
+        Raid hostileRaid = conqHostileRaids[0];
+        int backupCount = hostileRaid.unitCount - hostileRaid.dest.unitCount;
 
+        List<Capturable> backupBuildings = gameState.capturables.Where(c => c.owner == player && c.unitCount >= backupCount*2 && c is Building).ToList();
+        List<Capturable> inReactBuildings = backupBuildings.Where(c => Vector3.Distance(hostileRaid.transform.position, hostileRaid.dest.transform.position) > Vector3.Distance(c.transform.position, hostileRaid.dest.transform.position)).ToList();
+        if (inReactBuildings.Count > 0){
+          inReactBuildings[0].BeginRaid(hostileRaid.dest);
+        }
+      }
     }
 
     // Move units to a building to increase their unit count
