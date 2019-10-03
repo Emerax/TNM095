@@ -8,7 +8,7 @@ public class UnitIndicator : MonoBehaviour {
       if (owner != null) {
         textRenderer.color = owner.playerColor;
       } else {
-        textRenderer.color = Color.grey;
+        textRenderer.color = Color.white;
       }
         textRenderer.text = text;
     }

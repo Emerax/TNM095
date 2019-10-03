@@ -6,27 +6,24 @@ public class GameState : MonoBehaviour
 {
     private List<Capturable> buildings;
     private List<Raid> raids;
-    private List<Player> players;
+    private List<BaseController> controllers;
 
     // Start is called before the first frame update
     void Start() {
         buildings = new List<Capturable>(FindObjectsOfType<Capturable>());
         raids = new List<Raid>();
-        players = new List<Player>(FindObjectsOfType<Player>());
+        controllers = new List<BaseController>(FindObjectsOfType<BaseController>());
     }
 
     // Update is called once per frame
     void Update() {
-      if(players.Count == 1) {
-        Player winner = players[0];
-        onVictory(winner);
-      }
+
     }
 
-    private void onVictory(Player winner) {
-        Debug.Log(winner.name + " is our winner!");
-        //Remove the winning controller?
-        playerRemoved(winner);
+    private void onVictory(BaseController winner) {
+        Debug.Log(winner.player.name + " is our winner!");
+        winner.OnWin();
+        controllerRemoved(winner);
     }
 
     public void raidCreated(Raid raid) {
@@ -37,8 +34,12 @@ public class GameState : MonoBehaviour
         raids.Remove(raid);
     }
 
-    public void playerRemoved(Player player) {
-        players.Remove(player);
+    public void controllerRemoved(BaseController controller) {
+        controllers.Remove(controller);
+        if(controllers.Count == 1) {
+          BaseController winner = controllers[0];
+          onVictory(winner);
+        }
     }
 
 }

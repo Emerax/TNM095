@@ -19,8 +19,14 @@ public abstract class BaseController : MonoBehaviour {
     }
 
     protected virtual void OnLose() {
-      Debug.Log("I AM NO MORE!");
-      FindObjectOfType<GameState>().playerRemoved(player);
+      Debug.Log("I, player " + player.name + ", am no more!");
+      FindObjectOfType<GameState>().controllerRemoved(this);
+      Destroy(gameObject);
+    }
+
+    public virtual void OnWin() {
+      Debug.Log("I, player " + player.name + ", am the winner!");
+      FindObjectOfType<GameState>().controllerRemoved(this);
       Destroy(gameObject);
     }
 }

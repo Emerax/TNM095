@@ -4146,7 +4146,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b56d4673fdac2e17280ece5ea7fabbc8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5169,6 +5169,12 @@ PrefabInstance:
       propertyPath: m_textAlignment
       value: 514
       objectReference: {fileID: 0}
+    - target: {fileID: 5224009633057628400, guid: 16f764e301a7a384daf10cbae3780a59,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
+        type: 2}
     - target: {fileID: 5224009633057628406, guid: 16f764e301a7a384daf10cbae3780a59,
         type: 3}
       propertyPath: m_Mesh
@@ -5261,32 +5267,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
+    - target: {fileID: 8246047225366705480, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
         type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 13
+      propertyPath: m_LocalScale.x
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
+    - target: {fileID: 8246047225366705480, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
         type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
+      propertyPath: m_LocalScale.y
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
-        type: 2}
     - target: {fileID: 4393229739534177078, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
         type: 3}
       propertyPath: m_Mesh
