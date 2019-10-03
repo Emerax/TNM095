@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
-    private List<Capturable> buildings;
-    private List<Raid> raids;
-    private List<BaseController> controllers;
+    public List<Capturable> capturables;
+    public List<Raid> raids;
+    public List<BaseController> controllers;
 
     // Start is called before the first frame update
     void Start() {
-        buildings = new List<Capturable>(FindObjectsOfType<Capturable>());
+        capturables = new List<Capturable>(FindObjectsOfType<Capturable>());
         raids = new List<Raid>();
         controllers = new List<BaseController>(FindObjectsOfType<BaseController>());
     }
