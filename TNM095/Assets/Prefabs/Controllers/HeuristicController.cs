@@ -7,7 +7,7 @@ public class HeuristicController : BaseController {
 
     public float actionCooldown;
     private float currentActionCooldown = 0;
-    private enum State {CONQUER, DEFEND, REINFORCE, EXPAND, GROW, EMPTY, WEAKEN};
+    private enum State {ATTACK, DEFEND, REINFORCE, EXPAND, GROW, EMPTY};
     private State currState;
     private GameState gameState;
 
@@ -30,12 +30,21 @@ public class HeuristicController : BaseController {
     private void SelectState() {
       List<Capturable> ownCaps = gameState.capturables.Where(c => c.owner == player).ToList();
       List<Capturable> neutralCaps = gameState.capturables.Where(c => c.owner == null).ToList();
-      List<Raid> conqHostileRaids = gameState.raids.Where(r => ownCaps.Contains(r.dest) && r.unitCount > r.dest.unitCount && r.dest.unitCount != r.dest.unitCap).ToList();
+      List<Raid> conqHostileRaids = gameState.raids.Where(r => ownCaps.Contains(r.dest) && r.owner != player && r.unitCount > r.dest.unitCount && r.dest.unitCount != r.dest.unitCap).ToList();
+      int currentUnits = 0;
+      int currentMaxUnits = 0;
+
+      foreach (Capturable cap in ownCaps) {
+        currentUnits += cap.unitCount;
+        currentMaxUnits += cap.unitCap;
+      }
 
       if (neutralCaps.Count > 0) {
         currState = State.EXPAND;
       } else if (conqHostileRaids.Count > 0) {
         currState = State.DEFEND;
+      } else if (currentUnits >= 0.7 * currentMaxUnits) {
+        currState = State.EMPTY;
       } else {
         currState = State.GROW;
       }
@@ -44,17 +53,9 @@ public class HeuristicController : BaseController {
     // Changes state into the selected one
     private void ChangeState() {
         switch (currState) {
-          case State.CONQUER:
-              Debug.Log("Conquering...");
-              Conquer();
-              break;
           case State.DEFEND:
               Debug.Log("Defending...");
               Defend();
-              break;
-          case State.REINFORCE:
-              Debug.Log("Reinforcing...");
-              Reinforce();
               break;
           case State.EXPAND:
               Debug.Log("Expanding...");
@@ -68,19 +69,10 @@ public class HeuristicController : BaseController {
               Debug.Log("Emptying...");
               Empty();
               break;
-          case State.WEAKEN:
-              Debug.Log("Weakening...");
-              Weaken();
-              break;
           default:
               Debug.Log("You have entered a state that is not possible");
               break;
         }
-    }
-
-    // Attack with the intent to make the structure once own
-    private void Conquer() {
-
     }
 
     // Send troops to a friendly structure to avoid that it is taken over
@@ -97,11 +89,6 @@ public class HeuristicController : BaseController {
           inReactBuildings[0].BeginRaid(hostileRaid.dest);
         }
       }
-    }
-
-    // Move units to a building to increase their unit count
-    private void Reinforce() {
-
     }
 
     // Take over neutral buildings
@@ -144,11 +131,72 @@ public class HeuristicController : BaseController {
 
     // Move units from a building because it is at max capacity
     private void Empty() {
+      int rand  = Random.Range(0, 4);
 
+      if (rand < 1) {
+        Debug.Log("Reinforcing...");
+        Reinforce();
+      } else {
+        Debug.Log("Attacking...");
+        Attack();
+      }
     }
 
-    // Attack with the intent to lower a buildings unit count
-    private void Weaken() {
+    // Move units to a building to increase their unit count
+    private void Reinforce() {
+      List<Capturable> fullCaps = gameState.capturables.Where(c => c.owner == player && c.unitCount >= c.unitCap).ToList();
+      List<Capturable> noneFullCaps = gameState.capturables.Where(c => c.owner == player && c.unitCount < c.unitCap).ToList();
+      Capturable weakestCap = null;
+      float smallestUnitCount = Mathf.Infinity;
+      Capturable supportCap = null;
+      float smallestDist = Mathf.Infinity;
 
+      foreach (Capturable cap in noneFullCaps) {
+        if(cap.unitCount < smallestUnitCount) {
+          weakestCap = cap;
+          smallestUnitCount = cap.unitCount;
+        }
+      }
+
+      foreach (Capturable cap in fullCaps) {
+        float tempDist = Vector3.Distance(weakestCap.transform.position, cap.transform.position);
+        if (tempDist < smallestDist) {
+            smallestDist = tempDist;
+            supportCap = cap;
+        }
+      }
+
+      if (supportCap != null && weakestCap != null) {
+          supportCap.BeginRaid(weakestCap);
+      }
+    }
+
+    // Attacking a hostile structure
+    private void Attack() {
+      List<Capturable> hostileCaps = gameState.capturables.Where(c => c.owner != player).ToList();
+      Capturable weakestCap = null;
+      float smallestUnitCount = Mathf.Infinity;
+      Capturable attackCap = null;
+      float largestUnitCount = 0;
+
+      foreach (Capturable hostileCap in hostileCaps) {
+        if(hostileCap.unitCount < smallestUnitCount) {
+          weakestCap = hostileCap;
+          smallestUnitCount = hostileCap.unitCount;
+        }
+      }
+
+      List<Capturable> attackCaps = gameState.capturables.Where(c => c.owner == player && !(c is Tower)).ToList();
+
+      foreach (Capturable cap in attackCaps) {
+        if(cap.unitCount > largestUnitCount) {
+          attackCap = cap;
+          largestUnitCount = cap.unitCount;
+        }
+      }
+
+      if (attackCap != null && weakestCap != null) {
+          attackCap.BeginRaid(weakestCap);
+      }
     }
 }
