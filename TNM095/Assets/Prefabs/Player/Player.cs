@@ -2,7 +2,7 @@
 
 public class Player : MonoBehaviour {
     public Color playerColor;
-    public string name;
+    public string playerName;
 
     private int maxUnits;
 
