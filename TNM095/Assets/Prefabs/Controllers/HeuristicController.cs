@@ -10,14 +10,24 @@ public class HeuristicController : BaseController {
     private enum State {ATTACK, DEFEND, REINFORCE, EXPAND, GROW, EMPTY};
     private State currState;
     private GameState gameState;
+    private readonly List<Capturable> capturables = new List<Capturable>();
 
     void Start() {
+      foreach (var capturable in FindObjectsOfType<Capturable>()) {
+          capturables.Add(capturable);
+      }
       gameState = FindObjectOfType<GameState>();
       currState = State.GROW;
     }
 
     void Update() {
       if(currentActionCooldown <= 0) {
+        if (capturables.Where(c => c.owner == player).ToList().Count == 0) {
+          if (new List<Raid>(FindObjectsOfType<Raid>()).Where(r => r.owner == player).ToList().Count == 0) {
+            OnLose();
+          }
+        }
+
         SelectState();
         ChangeState();
         currentActionCooldown = actionCooldown;
@@ -84,9 +94,9 @@ public class HeuristicController : BaseController {
         int backupCount = hostileRaid.unitCount - hostileRaid.dest.unitCount;
 
         List<Capturable> backupBuildings = gameState.capturables.Where(c => c.owner == player && c.unitCount >= backupCount*2 && c is Building).ToList();
-        List<Capturable> inReactBuildings = backupBuildings.Where(c => Vector3.Distance(hostileRaid.transform.position, hostileRaid.dest.transform.position) > Vector3.Distance(c.transform.position, hostileRaid.dest.transform.position)).ToList();
-        if (inReactBuildings.Count > 0){
-          inReactBuildings[0].BeginRaid(hostileRaid.dest);
+        List<Capturable> inReachBuildings = backupBuildings.Where(c => Vector3.Distance(hostileRaid.transform.position, hostileRaid.dest.transform.position) > Vector3.Distance(c.transform.position, hostileRaid.dest.transform.position)).ToList();
+        if (inReachBuildings.Count > 0){
+          inReachBuildings[0].BeginRaid(hostileRaid.dest);
         }
       }
     }
@@ -159,7 +169,11 @@ public class HeuristicController : BaseController {
       }
 
       foreach (Capturable cap in fullCaps) {
-        float tempDist = Vector3.Distance(weakestCap.transform.position, cap.transform.position);
+        float tempDist = Mathf.Infinity;
+        if (weakestCap != null) {
+          tempDist = Vector3.Distance(weakestCap.transform.position, cap.transform.position);
+        }
+
         if (tempDist < smallestDist) {
             smallestDist = tempDist;
             supportCap = cap;
