@@ -64,19 +64,15 @@ public class HeuristicController : BaseController {
     private void ChangeState() {
         switch (currState) {
           case State.DEFEND:
-              Debug.Log("Defending...");
               Defend();
               break;
           case State.EXPAND:
-              Debug.Log("Expanding...");
               Expand();
               break;
           case State.GROW:
-              Debug.Log("Growing...");
               Grow();
               break;
           case State.EMPTY:
-              Debug.Log("Emptying...");
               Empty();
               break;
           default:
@@ -144,10 +140,8 @@ public class HeuristicController : BaseController {
       int rand  = Random.Range(0, 4);
 
       if (rand < 1) {
-        Debug.Log("Reinforcing...");
         Reinforce();
       } else {
-        Debug.Log("Attacking...");
         Attack();
       }
     }
