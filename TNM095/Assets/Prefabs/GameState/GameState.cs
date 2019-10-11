@@ -56,7 +56,7 @@ public class GameState : MonoBehaviour
     }
 
     private void onVictory(BaseController winner) {
-        Debug.Log(winner.player.name + " is our winner!");
+        Debug.Log(winner.player.playerName + " is our winner!");
         winner.OnWin();
         controllerRemoved(winner);
     }

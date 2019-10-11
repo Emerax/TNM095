@@ -35,11 +35,10 @@ public class HumanController : BaseController {
         if (Input.GetMouseButtonDown(0)) {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit rayHit)) {
-                Selectable s = rayHit.collider.GetComponent<Selectable>();
-                if (s != null) {
-                    Capturable clicked = s.select;
-                    if (clicked.owner == player) {
-                        Select(clicked);
+                Capturable c = rayHit.collider.GetComponent<Capturable>();
+                if (c != null) {
+                    if (c.owner == player) {
+                        Select(c);
                         return;
                     }
                 }
@@ -53,10 +52,9 @@ public class HumanController : BaseController {
             if (Input.GetMouseButtonDown(1)) {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit rayHit)) {
-                    Selectable s = rayHit.collider.GetComponent<Selectable>();
-                    if (s != null) {
-                        Capturable target = s.select;
-                        selected.BeginRaid(target);
+                    Capturable c = rayHit.collider.GetComponent<Capturable>();
+                    if (c != null) {
+                        selected.BeginRaid(c);
                     }
                 }
             }
