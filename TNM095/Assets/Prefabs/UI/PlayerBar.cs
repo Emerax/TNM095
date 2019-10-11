@@ -20,7 +20,7 @@ public class PlayerBar : MonoBehaviour
       owner = player;
       boxColor = player.playerColor;
       txt.color = boxColor;
-      txt.text = player.name;
+      txt.text = player.playerName;
       originalBoxWidth = image.rectTransform.rect.width;
       image.color = boxColor;
     }
