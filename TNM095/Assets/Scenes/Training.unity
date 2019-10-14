@@ -217,6 +217,11 @@ PrefabInstance:
       propertyPath: name
       value: Red
       objectReference: {fileID: 0}
+    - target: {fileID: 8835806425697723846, guid: 2ef446d778e4b8e45872250383860740,
+        type: 3}
+      propertyPath: playerName
+      value: Red
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ef446d778e4b8e45872250383860740, type: 3}
 --- !u!1 &11801409
@@ -828,6 +833,11 @@ PrefabInstance:
     - target: {fileID: 8835806425697723846, guid: 2ef446d778e4b8e45872250383860740,
         type: 3}
       propertyPath: name
+      value: Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835806425697723846, guid: 2ef446d778e4b8e45872250383860740,
+        type: 3}
+      propertyPath: playerName
       value: Green
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2337,6 +2347,11 @@ PrefabInstance:
       propertyPath: name
       value: Blue
       objectReference: {fileID: 0}
+    - target: {fileID: 8835806425697723846, guid: 2ef446d778e4b8e45872250383860740,
+        type: 3}
+      propertyPath: playerName
+      value: Blue
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ef446d778e4b8e45872250383860740, type: 3}
 --- !u!1001 &1355380568
@@ -2786,6 +2801,11 @@ PrefabInstance:
         type: 3}
       propertyPath: playerColor.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835806425697723846, guid: 2ef446d778e4b8e45872250383860740,
+        type: 3}
+      propertyPath: playerName
+      value: Yellow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ef446d778e4b8e45872250383860740, type: 3}
