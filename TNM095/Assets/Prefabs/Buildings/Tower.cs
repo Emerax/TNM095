@@ -22,7 +22,7 @@ public class Tower : Capturable {
                 if(enemyRaids.Count > 0) {
                     foreach(Raid r in enemyRaids) {
                         Arrow arrow = Instantiate<Arrow>(arrowPrefab, transform.position + Vector3.up, Quaternion.identity);
-                        arrow.Init(r, damage);
+                        arrow.Init(r, transform.parent, damage);
                     }
                 }
             }

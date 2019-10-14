@@ -84,13 +84,13 @@ public class Capturable : MonoBehaviour {
 
     public void BeginRaid(Capturable target) {
         int raidCount = unitCount / 2;
-        if(raidCount > 0 && (target.owner != owner || target.unitCount < target.unitCap)) {
+        if(raidCount > 0 && (target.owner != owner || target.unitCount < target.unitCap) && target != this) {
             unitCount -= raidCount;
 
             Vector3 targetVector = target.transform.position - transform.position;
             Raid raid = Instantiate(raidPrefab, transform.position, Quaternion.LookRotation(targetVector, Vector3.up));
 
-            raid.Init(owner, target, raidCount);
+            raid.Init(owner, transform.parent, target, raidCount);
             unitIndicator.UpdateText(unitCount.ToString(), owner);
         }
     }
