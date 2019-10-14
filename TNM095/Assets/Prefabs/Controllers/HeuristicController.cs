@@ -9,14 +9,14 @@ public class HeuristicController : BaseController {
     private float currentActionCooldown = 0;
     private enum State {ATTACK, DEFEND, REINFORCE, EXPAND, GROW, EMPTY};
     private State currState;
-    private GameState gameState;
+    private GameBoard gameBoard;
     private readonly List<Capturable> capturables = new List<Capturable>();
 
     void Start() {
       foreach (var capturable in FindObjectsOfType<Capturable>()) {
           capturables.Add(capturable);
       }
-      gameState = FindObjectOfType<GameState>();
+      gameBoard = FindObjectOfType<GameBoard>();
       currState = State.GROW;
     }
 
@@ -38,9 +38,9 @@ public class HeuristicController : BaseController {
 
     // Selects the next state
     private void SelectState() {
-      List<Capturable> ownCaps = gameState.capturables.Where(c => c.owner == player).ToList();
-      List<Capturable> neutralCaps = gameState.capturables.Where(c => c.owner == null).ToList();
-      List<Raid> conqHostileRaids = gameState.raids.Where(r => ownCaps.Contains(r.dest) && r.owner != player && r.unitCount > r.dest.unitCount && r.dest.unitCount != r.dest.unitCap).ToList();
+      List<Capturable> ownCaps = gameBoard.capturables.Where(c => c.owner == player).ToList();
+      List<Capturable> neutralCaps = gameBoard.capturables.Where(c => c.owner == null).ToList();
+      List<Raid> conqHostileRaids = gameBoard.raids.Where(r => ownCaps.Contains(r.dest) && r.owner != player && r.unitCount > r.dest.unitCount && r.dest.unitCount != r.dest.unitCap).ToList();
       int currentUnits = 0;
       int currentMaxUnits = 0;
 
@@ -83,13 +83,13 @@ public class HeuristicController : BaseController {
 
     // Send troops to a friendly structure to avoid that it is taken over
     private void Defend() {
-      List<Capturable> ownCaps = gameState.capturables.Where(c => c.owner == player).ToList();
-      List<Raid> conqHostileRaids = gameState.raids.Where(r => ownCaps.Contains(r.dest) && r.unitCount > r.dest.unitCount && r.dest.unitCount != r.dest.unitCap).ToList();
+      List<Capturable> ownCaps = gameBoard.capturables.Where(c => c.owner == player).ToList();
+      List<Raid> conqHostileRaids = gameBoard.raids.Where(r => ownCaps.Contains(r.dest) && r.unitCount > r.dest.unitCount && r.dest.unitCount != r.dest.unitCap).ToList();
       if(conqHostileRaids != null) {
         Raid hostileRaid = conqHostileRaids[0];
         int backupCount = hostileRaid.unitCount - hostileRaid.dest.unitCount;
 
-        List<Capturable> backupBuildings = gameState.capturables.Where(c => c.owner == player && c.unitCount >= backupCount*2 && c is Building).ToList();
+        List<Capturable> backupBuildings = gameBoard.capturables.Where(c => c.owner == player && c.unitCount >= backupCount*2 && c is Building).ToList();
         List<Capturable> inReachBuildings = backupBuildings.Where(c => Vector3.Distance(hostileRaid.transform.position, hostileRaid.dest.transform.position) > Vector3.Distance(c.transform.position, hostileRaid.dest.transform.position)).ToList();
         if (inReachBuildings.Count > 0){
           inReachBuildings[0].BeginRaid(hostileRaid.dest);
@@ -99,15 +99,15 @@ public class HeuristicController : BaseController {
 
     // Take over neutral buildings
     private void Expand() {
-      List<Capturable> neutralCaps = gameState.capturables.Where(c => c.owner == null  && !(c is Tower)).ToList();
-      List<Capturable> neutralTowers = gameState.capturables.Where(c => c.owner == null && c is Tower).ToList();
-      List<Capturable> ownCaps = gameState.capturables.Where(c => c.owner == player && !(c is Tower)).ToList();
+      List<Capturable> neutralCaps = gameBoard.capturables.Where(c => c.owner == null  && !(c is Tower)).ToList();
+      List<Capturable> neutralTowers = gameBoard.capturables.Where(c => c.owner == null && c is Tower).ToList();
+      List<Capturable> ownCaps = gameBoard.capturables.Where(c => c.owner == player && !(c is Tower)).ToList();
       float smallestDist = Mathf.Infinity;
       Capturable origin = null;
       Capturable destination = null;
 
 
-      List<Capturable> sixtyPlusCaps = gameState.capturables.Where(c => c.owner == player && c.unitCount > 60).ToList();
+      List<Capturable> sixtyPlusCaps = gameBoard.capturables.Where(c => c.owner == player && c.unitCount > 60).ToList();
       if (neutralTowers.Count > 0 && sixtyPlusCaps.Count > 0) {
         neutralCaps = neutralTowers;
         ownCaps = sixtyPlusCaps;
@@ -148,8 +148,8 @@ public class HeuristicController : BaseController {
 
     // Move units to a building to increase their unit count
     private void Reinforce() {
-      List<Capturable> fullCaps = gameState.capturables.Where(c => c.owner == player && c.unitCount >= c.unitCap).ToList();
-      List<Capturable> noneFullCaps = gameState.capturables.Where(c => c.owner == player && c.unitCount < c.unitCap).ToList();
+      List<Capturable> fullCaps = gameBoard.capturables.Where(c => c.owner == player && c.unitCount >= c.unitCap).ToList();
+      List<Capturable> noneFullCaps = gameBoard.capturables.Where(c => c.owner == player && c.unitCount < c.unitCap).ToList();
       Capturable weakestCap = null;
       float smallestUnitCount = Mathf.Infinity;
       Capturable supportCap = null;
@@ -181,7 +181,7 @@ public class HeuristicController : BaseController {
 
     // Attacking a hostile structure
     private void Attack() {
-      List<Capturable> hostileCaps = gameState.capturables.Where(c => c.owner != player).ToList();
+      List<Capturable> hostileCaps = gameBoard.capturables.Where(c => c.owner != player).ToList();
       Capturable weakestCap = null;
       float smallestUnitCount = Mathf.Infinity;
       Capturable attackCap = null;
@@ -194,7 +194,7 @@ public class HeuristicController : BaseController {
         }
       }
 
-      List<Capturable> attackCaps = gameState.capturables.Where(c => c.owner == player && !(c is Tower)).ToList();
+      List<Capturable> attackCaps = gameBoard.capturables.Where(c => c.owner == player && !(c is Tower)).ToList();
 
       foreach (Capturable cap in attackCaps) {
         if(cap.unitCount > largestUnitCount) {

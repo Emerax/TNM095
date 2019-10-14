@@ -7,7 +7,7 @@ public class Raid : MonoBehaviour {
     private List<GameObject> raiders;
     private int spawnNumber;
     private Vector3 movVec;
-    
+
     public Capturable dest;
     public int unitCount;
     public float circleSize;
@@ -28,7 +28,7 @@ public class Raid : MonoBehaviour {
         }
         Colorize();
 
-        GameObject.FindObjectOfType<GameState>().raidCreated(this);
+        GameObject.FindObjectOfType<GameBoard>().RaidCreated(this);
     }
 
     void Update() {
@@ -36,7 +36,7 @@ public class Raid : MonoBehaviour {
     }
 
     void OnDestroy() {
-        GameObject.FindObjectOfType<GameState>()?.raidRemoved(this);
+        GameObject.FindObjectOfType<GameBoard>()?.RaidRemoved(this);
     }
 
     private void Move() {
@@ -54,8 +54,9 @@ public class Raid : MonoBehaviour {
         }
     }
 
-    public void Init(Player owner, Capturable target, int units) {
+    public void Init(Player owner, Transform parent, Capturable target, int units) {
         this.owner = owner;
+        transform.parent = parent;
         dest = target;
         unitCount = units;
     }
