@@ -7,6 +7,7 @@ public class Raid : MonoBehaviour {
     private List<GameObject> raiders;
     private int spawnNumber;
     private Vector3 movVec;
+    private float distanceRemaining;
 
     public Capturable dest;
     public int unitCount;
@@ -41,8 +42,10 @@ public class Raid : MonoBehaviour {
 
     private void Move() {
         transform.position += movVec * speed * Time.deltaTime;
-        if ((transform.position - dest.transform.position).magnitude < 0.1)
+        distanceRemaining -= speed * Time.deltaTime;
+        if (distanceRemaining < 0.1f) {
             dest.UnitsArrive(this);
+        }
     }
     private void Colorize() {
         Color newColor = Color.gray;
@@ -59,6 +62,7 @@ public class Raid : MonoBehaviour {
         transform.parent = parent;
         dest = target;
         unitCount = units;
+        distanceRemaining = Vector3.Distance(transform.position, dest.transform.position);
     }
 
     public void Attacked(int damage) {
