@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Capturable : MonoBehaviour {
     /// <summary>
@@ -11,11 +12,6 @@ public class Capturable : MonoBehaviour {
     /// List of Renderers that should change their material to that of the owning player to indicate ownership¨.
     /// </summary>
     public List<Renderer> ownerIndicators;
-
-    /// <summary>
-    /// Number of units that begin stationed in this capturable.
-    /// </summary>
-    public int startingUnits;
 
     /// <summary>
     /// Maximum number of units that can be held by this <see cref="Capturable"/>
@@ -39,23 +35,24 @@ public class Capturable : MonoBehaviour {
     /// </summary>
     public int unitCount;
 
+    public int trainingID;
+
+    private GameBoard board;
+
     void Start() {
         Colorize();
 
-        unitCount = startingUnits;
+        board = transform.parent.gameObject.GetComponent<GameBoard>();
+        Assert.IsNotNull(board);
 
         selectionIndicator.gameObject.SetActive(false);
 
         if (owner != null) {
             owner.UpdateMaxUnits(unitCap);
-            unitIndicator.UpdateText(unitCount.ToString(), owner);
+            unitIndicator.UpdateText(trainingID + ": (" + unitCount.ToString() + ")", owner);
         } else {
-            unitIndicator.UpdateText(unitCount.ToString(), owner);
+            unitIndicator.UpdateText(trainingID + ": (" + unitCount.ToString() + ")", owner);
         }
-    }
-
-    // Update is called once per frame
-    void Update() {
     }
 
     public void OnSelected() {
@@ -73,25 +70,25 @@ public class Capturable : MonoBehaviour {
         } else {
             if (raid.unitCount > unitCount) {
                 ChangeOwner(raid.owner);
-            } else if (raid.unitCount == unitCount){
-              ChangeOwner(null);
+            } else if (raid.unitCount == unitCount) {
+                ChangeOwner(null);
             }
             unitCount = Mathf.Abs(unitCount - raid.unitCount);
         }
-        unitIndicator.UpdateText(unitCount.ToString(), owner);
-        Destroy(raid.gameObject);
+        unitIndicator.UpdateText(trainingID + ": (" + unitCount.ToString() + ")", owner);
+        board.RaidRemoved(raid);
     }
 
     public void BeginRaid(Capturable target) {
         int raidCount = unitCount / 2;
-        if(raidCount > 0 && (target.owner != owner || target.unitCount < target.unitCap) && target != this) {
+        if (raidCount > 0 && (target.owner != owner || target.unitCount < target.unitCap) && target != this) {
             unitCount -= raidCount;
 
             Vector3 targetVector = target.transform.position - transform.position;
             Raid raid = Instantiate(raidPrefab, transform.position, Quaternion.LookRotation(targetVector, Vector3.up));
 
             raid.Init(owner, transform.parent, target, raidCount);
-            unitIndicator.UpdateText(unitCount.ToString(), owner);
+            unitIndicator.UpdateText(trainingID + ": (" + unitCount.ToString() + ")", owner);
         }
     }
 
@@ -99,10 +96,35 @@ public class Capturable : MonoBehaviour {
         if (owner != null) {
             owner.UpdateMaxUnits(-unitCap);
         }
+        Player oldOwner = owner;
+        if(oldOwner != null) {
+        }
         owner = newOwner;
         if (owner != null) {
-          owner.UpdateMaxUnits(unitCap);
+            owner.UpdateMaxUnits(unitCap);
         }
+        board.CheckWinning();
+        Colorize();
+    }
+
+    /// <summary>
+    /// Forcibly sets the owner of this capturable while avoiding side-effects. Should only be used for initialization.
+    /// In any other case, use <see cref="ChangeOwner(Player)"/> instead.
+    /// </summary>
+    /// <param name="newOwner"></param>
+    public void SetOwner(Player newOwner) {
+        owner = newOwner;
+        if (owner != null) {
+            owner.UpdateMaxUnits(unitCap);
+        }
+        unitIndicator.UpdateText(trainingID + ": (" + unitCount.ToString() + ")", owner);
+        Colorize();
+    }
+
+    public void Reset() {
+        owner = null;
+        unitCount = 0;
+        unitIndicator.UpdateText(trainingID + ": (" + unitCount.ToString() + ")", owner);
         Colorize();
     }
 

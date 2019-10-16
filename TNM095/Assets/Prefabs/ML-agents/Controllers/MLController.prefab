@@ -43,12 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde60802571fbef4b9ca27209cc04b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brain: {fileID: 0}
+  brain: {fileID: 11400000, guid: a8a4213af4140c9488bc8622192966e9, type: 2}
   agentParameters:
     agentCameras: []
     agentRenderTextures: []
     maxStep: 0
-    resetOnDone: 0
+    resetOnDone: 1
     onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 1
+    numberOfActionsBetweenDecisions: 60
   player: {fileID: 0}
+  board: {fileID: 0}
+  actionCooldown: 0

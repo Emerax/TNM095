@@ -7,9 +7,4 @@ public abstract class BaseController : MonoBehaviour {
     /// Player instance controlled by this controller.
     /// </summary>
     public Player player;
-
-    protected virtual void OnLose() {
-      FindObjectOfType<GameBoard>().ControllerRemoved(this);
-      Destroy(gameObject);
-    }
 }

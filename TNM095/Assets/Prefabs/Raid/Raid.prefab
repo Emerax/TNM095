@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba080d488bee661e98de9dbe85a77a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dest: {fileID: 0}
   unitCount: 0
   circleSize: 2
   speed: 2
@@ -53,6 +54,7 @@ MonoBehaviour:
     type: 3}
   indicator: {fileID: 2081956892493833944}
   owner: {fileID: 0}
+  trainingMode: 1
 --- !u!136 &1439245961782340866
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -95,6 +97,32 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitIndicator
       objectReference: {fileID: 0}
+    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
+        type: 2}
     - target: {fileID: 8246047225366705480, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -160,32 +188,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9094901034842909918, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
-        type: 2}
     - target: {fileID: 4393229739534177078, guid: f8f8c32284fcdaf4c9dc9c7bc7a11a7e,
         type: 3}
       propertyPath: m_Mesh

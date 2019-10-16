@@ -32,11 +32,9 @@ public class RandomController : BaseController {
                 if (own.Count > 0) {
                     Capturable selected = own[Random.Range(0, own.Count)];
                     List<Capturable> targets = capturables.Where(c => c != selected && (c.owner != player || c.unitCount < c.unitCap)).ToList();
-                    Capturable target = targets[Random.Range(0, targets.Count)];
-                    selected.BeginRaid(target);
-                } else {
-                    if (new List<Raid>(FindObjectsOfType<Raid>()).Where(r => r.owner == player).ToList().Count == 0) {
-                      OnLose();
+                    if (targets.Count > 0) {
+                        Capturable target = targets[Random.Range(0, targets.Count)];
+                        selected.BeginRaid(target);
                     }
                 }
             }

@@ -21,7 +21,7 @@ public class Tower : Capturable {
                 List<Raid> enemyRaids = targettingCircle.currentColliders.Where(r => r.owner != owner).ToList();
                 if(enemyRaids.Count > 0) {
                     foreach(Raid r in enemyRaids) {
-                        Arrow arrow = Instantiate<Arrow>(arrowPrefab, transform.position + Vector3.up, Quaternion.identity);
+                        Arrow arrow = Instantiate(arrowPrefab, transform.position + Vector3.up, Quaternion.identity);
                         arrow.Init(r, transform.parent, damage);
                     }
                 }

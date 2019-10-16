@@ -1,102 +1,115 @@
-﻿using System.Collections;
+﻿using MLAgents;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GameBoard : MonoBehaviour
-{
+public class GameBoard : MonoBehaviour {
     public List<Capturable> capturables;
     public List<Raid> raids;
     public List<BaseController> controllers;
     public Dictionary<Player, float> unitPercent = new Dictionary<Player, float>();
-    public Canvas sceneCanvas;
+    public PerformanceUI sceneCanvas;
     public RandomController randomControllerPrefab;
     public HeuristicController heuristicControllerPrefab;
-    public Player player1;
-    public Player player2;
-    public Player player3;
-    public Player player4;
+    public List<Player> players;
+    public List<Agent> agents;
+    public bool isTrainingGame;
+    public bool randomResets;
+
+    public float timeLimit;
+
+    private float currentTime = 0;
+    private readonly List<Player> contestants = new List<Player>();
 
     void Start() {
-      MakeThreeRandOneHeurController();
+        capturables = new List<Capturable>(GetComponentsInChildren<Capturable>());
+        raids = new List<Raid>();
+        controllers = new List<BaseController>(GetComponentsInChildren<BaseController>());
+        sceneCanvas = FindObjectOfType<PerformanceUI>();
 
-      capturables = new List<Capturable>(GetComponentsInChildren<Capturable>());
-      raids = new List<Raid>();
-      controllers = new List<BaseController>(GetComponentsInChildren<BaseController>());
-      sceneCanvas = FindObjectOfType<Canvas>();
+        contestants.AddRange(players);
 
-      foreach (BaseController controller in controllers) {
-        unitPercent.Add(controller.player, 0);
-      }
+        for (int i = 0; i < capturables.Count; ++i) {
+            capturables[i].trainingID = i; 
+        }
     }
 
     void Update() {
-      UpdatePercent();
-      if (sceneCanvas) {
-        UpdateCanvas();
-      }
-    }
-
-    private void UpdateCanvas() {
-      foreach (KeyValuePair<Player, float> pair in unitPercent) {
-        foreach (PlayerBar bar in sceneCanvas.bars) {
-          if (bar.owner == pair.Key) {
-            bar.ReSize(pair.Value);
-          }
-        }
-      }
-    }
-
-    private void UpdatePercent() {
-      Dictionary<Player, int> playerUnitCount = new Dictionary<Player, int>();
-      int total = 0;
-
-      foreach (BaseController controller in controllers) {
-        int capCount = capturables.Where(c => c.owner == controller.player).Select(c => c.unitCount).Sum();
-        int raidCount = raids.Where(r => r.owner == controller.player).Select(r => r.unitCount).Sum();
-        playerUnitCount[controller.player] =  capCount + raidCount;
-        total += capCount + raidCount;
-      }
-
-      var keys = unitPercent.Keys.ToList();
-
-      foreach (Player player in keys) {
-        if (playerUnitCount.ContainsKey(player) && total != 0) {
-          unitPercent[player] = playerUnitCount[player]/(float)total;
+        if(currentTime >= timeLimit) {
+            Reset();
+            currentTime = 0;
         } else {
-          unitPercent[player] = 0;
+            currentTime += Time.unscaledDeltaTime;
         }
-      }
-    }
-
-    private void OnVictory(BaseController winner) {
-      Reset();
     }
 
     public void RaidCreated(Raid raid) {
-      raids.Add(raid);
+        raids.Add(raid);
     }
 
     public void RaidRemoved(Raid raid) {
-      raids.Remove(raid);
+        raids.Remove(raid);
+        Destroy(raid.gameObject);
+        CheckWinning();
     }
 
-    public void ControllerRemoved(BaseController controller) {
-      controllers.Remove(controller);
-      if(controllers.Count == 1) {
-        BaseController winner = controllers[0];
-        OnVictory(winner);
-      }
-    }
+    public void CheckWinning() {
+        if (capturables.Select(c => c.owner).Concat(raids.Select(r => r.owner)).Distinct().Count() < 2) {
+            //Less than two players remain, meaning one has won.
+            Reset();
+        }
 
-    public void MakeThreeRandOneHeurController() {
-      Instantiate<RandomController>(randomControllerPrefab, Vector3.zero, transform.rotation, transform).player = player1;
-      Instantiate<RandomController>(randomControllerPrefab, Vector3.zero, transform.rotation, transform).player = player2;
-      Instantiate<RandomController>(randomControllerPrefab, Vector3.zero, transform.rotation, transform).player = player3;
-      Instantiate<HeuristicController>(heuristicControllerPrefab, Vector3.zero, transform.rotation, transform).player = player4;
+        if (isTrainingGame) {
+            if(!capturables.Select(c => c.owner).Concat(raids.Select(r => r.owner)).Distinct().Any(p => p != null && p.isMLControlled)) {
+                //No ML-controlled players remain. If this is a training game, we can reset.
+                Reset();
+            }
+        }
     }
 
     public void Reset() {
-      
+        foreach(Agent agent in agents) {
+            agent.Done();
+        }
+
+        foreach (Capturable capturable in capturables) {
+            capturable.Reset();
+        }
+
+        foreach (Raid raid in raids) {
+            if(raid != null) {
+                Destroy(raid.gameObject);
+            }
+        }
+        raids.Clear();
+
+        foreach(Player player in players) {
+            player.Reset();
+        }
+
+        if (randomResets) {
+            List<Player> playerBuffer = new List<Player>(players);
+            List<Capturable> capturableBuffer = new List<Capturable>(capturables);
+            for(int i = 0; i < players.Count; ++i) {
+                Player player = playerBuffer[Random.Range(0, playerBuffer.Count)];
+                int startingCapturables = Random.Range(0, capturableBuffer.Count);
+                for(int j = 0; j < startingCapturables; ++j) {
+                    Capturable capturable = capturableBuffer[Random.Range(0, capturableBuffer.Count)];
+                    capturable.SetOwner(player);
+
+                    capturableBuffer.Remove(capturable);
+                }
+
+                playerBuffer.Remove(player);
+            }
+        } else {
+            List<Capturable> forts = capturables.Where(c => c.gameObject.name == "Fort").ToList();
+            foreach (Player player in players) {
+                forts[0].SetOwner(player);
+                forts.RemoveAt(0);
+            }
+        }
+
+        currentTime = 0;
     }
 }

@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b23992c8eb17439887f5e944bf04a40, type: 3}
-  m_Name: FoodCollectorLearning
+  m_Name: LearningConquestBrain52
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 53
+    vectorObservationSize: 52
     numStackedVectorObservations: 1
-    vectorActionSize: 03000000030000000300000002000000
+    vectorActionSize: 0e0000000d000000
     cameraResolutions: []
     vectorActionDescriptions:
-    - 
-    - 
-    - 
-    - 
+    - Capturable to select
+    - Capturable to target
     vectorActionSpaceType: 0
-  model: {fileID: 5022602860645237092, guid: d32fca21cf4c04536ab7f88eb9de83e0, type: 3}
+  model: {fileID: 5022602860645237092, guid: 05d0f40abfefc61428b013253c47e4a9, type: 3}
   inferenceDevice: 0

@@ -18,12 +18,6 @@ public class HumanController : BaseController {
         if(selected != null) {
             UpdateSelection();
         }
-
-        if (new List<Capturable>(FindObjectsOfType<Capturable>()).Where(r => r.owner == player).ToList().Count == 0) {
-          if (new List<Raid>(FindObjectsOfType<Raid>()).Where(r => r.owner == player).ToList().Count == 0) {
-            OnLose();
-          }
-        }
     }
 
     private void UpdateMouseInput() {
