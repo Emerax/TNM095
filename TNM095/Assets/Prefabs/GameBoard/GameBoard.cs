@@ -54,8 +54,14 @@ public class GameBoard : MonoBehaviour {
     }
 
     public void CheckWinning() {
-        if (capturables.Select(c => c.owner).Concat(raids.Select(r => r.owner)).Distinct().Count() < 2) {
+        var remainingPlayers = capturables.Select(c => c.owner).Concat(raids.Select(r => r.owner)).Distinct();
+        if (remainingPlayers.Count() < 2) {
             //Less than two players remain, meaning one has won.
+            Player winner = remainingPlayers.First();
+            if (winner.isMLControlled) {
+                //Neural network managed to win.
+                agents.First(a => (a as LearningConquestAgent).player == winner).AddReward(100.0f);
+            }
             Reset();
         }
 

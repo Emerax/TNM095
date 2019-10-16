@@ -18,7 +18,7 @@ public class RandomController : BaseController {
     private readonly List<Capturable> capturables = new List<Capturable>();
 
     void Start() {
-        foreach (var capturable in FindObjectsOfType<Capturable>()) {
+        foreach (var capturable in transform.parent.GetComponentsInChildren<Capturable>()) {
             capturables.Add(capturable);
         }
     }

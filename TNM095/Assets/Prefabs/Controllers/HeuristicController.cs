@@ -13,10 +13,10 @@ public class HeuristicController : BaseController {
     private readonly List<Capturable> capturables = new List<Capturable>();
 
     void Start() {
-        foreach (var capturable in FindObjectsOfType<Capturable>()) {
+        foreach (var capturable in transform.parent.GetComponentsInChildren<Capturable>()) {
             capturables.Add(capturable);
         }
-        gameBoard = FindObjectOfType<GameBoard>();
+        gameBoard = transform.parent.GetComponent<GameBoard>();
         currState = State.GROW;
     }
 

@@ -82,7 +82,7 @@ MonoBehaviour:
   - {fileID: 1577330023062591820}
   isTrainingGame: 1
   randomResets: 1
-  timeLimit: 120
+  timeLimit: 60
 --- !u!1 &5594607680072304185
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,6 +605,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: MLControllerRed
       objectReference: {fileID: 0}
+    - target: {fileID: 2152167915606850193, guid: 50251a9a186d9d7409006dcca4409c9f,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 3979806763594653094}
+    - target: {fileID: 2152167915606850193, guid: 50251a9a186d9d7409006dcca4409c9f,
+        type: 3}
+      propertyPath: brain
+      value: 
+      objectReference: {fileID: 11400000, guid: a8a4213af4140c9488bc8622192966e9,
+        type: 2}
+    - target: {fileID: 2152167915606850193, guid: 50251a9a186d9d7409006dcca4409c9f,
+        type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 94344869860047543}
     - target: {fileID: 3286566992663758405, guid: 50251a9a186d9d7409006dcca4409c9f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -660,22 +676,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2152167915606850193, guid: 50251a9a186d9d7409006dcca4409c9f,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 3979806763594653094}
-    - target: {fileID: 2152167915606850193, guid: 50251a9a186d9d7409006dcca4409c9f,
-        type: 3}
-      propertyPath: brain
-      value: 
-      objectReference: {fileID: 11400000, guid: a8a4213af4140c9488bc8622192966e9,
-        type: 2}
-    - target: {fileID: 2152167915606850193, guid: 50251a9a186d9d7409006dcca4409c9f,
-        type: 3}
-      propertyPath: board
-      value: 
-      objectReference: {fileID: 94344869860047543}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50251a9a186d9d7409006dcca4409c9f, type: 3}
 --- !u!114 &1577330023062591820 stripped

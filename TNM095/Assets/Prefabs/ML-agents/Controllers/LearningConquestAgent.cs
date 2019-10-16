@@ -47,15 +47,12 @@ public class LearningConquestAgent : Agent {
 
     public override void AgentAction(float[] vectorAction, string textAction) {
         if(currentActionCooldown <= 0) {
-            Debug.Log("Select: " + vectorAction[0] + ", target: " + vectorAction[1]);
             base.AgentAction(vectorAction, textAction);
             //0-12: index of capturable to select.
             //13: do nothing this step.
             int selectedIndex = (int)vectorAction[0];
             //0-12 index of building to target.
             int targetIndex = (int)vectorAction[1];
-
-            //Debug.Log("Selected:" + selectedIndex + ", target: " + targetIndex);
 
             if (selectedIndex != 13) {
                 Capturable selected = board.capturables[selectedIndex];
