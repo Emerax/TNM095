@@ -94,6 +94,7 @@ public class GameBoard : MonoBehaviour {
         }
 
         if (randomResets) {
+            //Randomize all capturable statuses to let the AI see more states.
             List<Player> playerBuffer = new List<Player>(players);
             List<Capturable> capturableBuffer = new List<Capturable>(capturables);
             for(int i = 0; i < players.Count; ++i) {
@@ -111,8 +112,10 @@ public class GameBoard : MonoBehaviour {
         } else {
             List<Capturable> forts = capturables.Where(c => c.gameObject.name == "Fort").ToList();
             foreach (Player player in players) {
-                forts[0].SetOwner(player);
-                forts.RemoveAt(0);
+                //Randomize what forts the players start in to reduce risk of overfitting.
+                Capturable fort = forts[Random.Range(0, forts.Count)];
+                fort.SetOwner(player);
+                forts.Remove(fort);
             }
         }
 

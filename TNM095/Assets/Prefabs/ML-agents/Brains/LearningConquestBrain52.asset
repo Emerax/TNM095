@@ -15,7 +15,7 @@ MonoBehaviour:
   brainParameters:
     vectorObservationSize: 52
     numStackedVectorObservations: 1
-    vectorActionSize: 0e0000000d000000
+    vectorActionSize: 0d0000000d000000
     cameraResolutions: []
     vectorActionDescriptions:
     - Capturable to select
